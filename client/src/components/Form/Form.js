@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import List from '../List/List'
 
 const Form = () => {
-    const { register, handleSubmit, resetField } = useForm()
+    const { register, handleSubmit } = useForm()
 
     const onSubmit = (data) => { 
         console.log(data)
