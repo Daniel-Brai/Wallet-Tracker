@@ -19,8 +19,13 @@ app.use(compress())
 app.use(express.json())
 
 // routes
+app.get('/', (req, res, next) => {
+    res.status(200).send('Welcome to my Wallet Tracker Server')
+})
+
 app.use('/api', router)
 
+// Server setup
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is listening on ${PORT}...`);
