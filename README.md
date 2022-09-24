@@ -8,4 +8,4 @@ An simple wallet tracker you can use to track your expenses, savings, investment
 - Also for hte server directory,, run `npm i && npm run dev` to install the dependencies and start up the express server
 - Navigate to `http://localhost:3000` to view the app in your browser
 
-N.B: It is a work in progress!
+**N.B**: It is a work in progress!
