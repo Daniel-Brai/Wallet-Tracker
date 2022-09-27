@@ -1,27 +1,6 @@
 import React from 'react'
-
-const tracks = [
-    {
-        type: 'Savings',
-        color: '#F9C74F',
-        percent: 45
-    },
-    {
-        type: 'Investment',
-        color: '#F9C74F',
-        percent: 45
-    },
-    {
-        type: 'Expenses',
-        color: 'rgb(54, 162, 235)',
-        percent: 45
-    },
-    {
-        type: 'Others',
-        color: 'rgb(54, 162, 235)',
-        percent: 45
-    }
-]
+import { default as api } from '../../store/apiSlice'
+import { getLabels } from '../../helpers/helper'
 
 const Label = ({ data }) => {
     if (!data) return;
@@ -31,16 +10,27 @@ const Label = ({ data }) => {
                 <div style={{ backgroundColor: data.color ?? '#F9C74F' }} className="w-2 h-2 rounded py-3"></div>
                 <h3 className="text-md">{data.type ?? ""}</h3>
             </div>
-            <h3 className="font-bold">{data.percent ?? 0}%</h3>
+            <h3 className="font-bold">{Math.round(data.percent) ?? 0}%</h3>
         </div>
     )
 }
 
 const Labels = () => {
+    let transactions;
+    const { data, isSuccess, isFetching, isError } = api.useGetLabelsQuery()
+
+    if (isFetching) {
+        transactions = <div>Fetching...</div>
+    } else if (isSuccess) {
+        transactions = getLabels(data, 'type').map((track, index) => <Label key={index} data={track}></Label>)
+    } else if (isError) {
+        transactions = <div>😔 Oops! Something went wrong</div>
+    }
+
     return (
         <>
             {
-                tracks.map((track, index) => <Label key={index} data={track}></Label>)
+                transactions
             }
         </>
     )

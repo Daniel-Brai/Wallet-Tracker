@@ -2,12 +2,12 @@ const Category = require('../models/category.model')
 const Transaction = require('../models/transaction.model')
 
 const controller = {
-    getCategories: async (req, res) => { 
+    getCategories: async (req, res) => {
         try {
             const categories = await Category.find({}).limit(100)
             return res.status(200).json(categories)
         } catch (error) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 error: error.message
             })
         }
@@ -17,10 +17,10 @@ const controller = {
             message: "The type and color fields are required!"
         })
 
-        const { type, color } = req.body
-        
-        const category = new Category({ 
-            type: type, 
+        const {type, color} = req.body
+
+        const category = new Category({
+            type: type,
             color: color
         })
 
@@ -34,12 +34,12 @@ const controller = {
         }
 
     },
-    getTransactions: async (req, res) => { 
+    getTransactions: async (req, res) => {
         try {
             const transactions = await Transaction.find({}).limit(100)
             return res.status(200).json(transactions)
         } catch (error) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 error: error.message
             })
         }
@@ -50,7 +50,7 @@ const controller = {
         })
 
         const { name, type, amount} = req.body
-        
+
         const transaction = new Transaction({
             name: name,
             type: type,
@@ -108,7 +108,7 @@ const controller = {
                         amount: value.amount,
                         color: value.categories_info[0].color
                     },
-                ) 
+                )
             )
             return res.status(200).json(filter)
         } catch (error) {
