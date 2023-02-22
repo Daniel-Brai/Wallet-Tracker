@@ -17,7 +17,7 @@ const Graph = () => {
         let values = getChartData(data)
         chartData = <Doughnut {...values}></Doughnut>
     } else if (isError) {
-        chartData = <div>😔 Oops! Something went wrong</div>
+        chartData = <div style="margin-top: 18px; margin-bottom: 18px">😔 Oops! Something went wrong</div>
     }
 
     return (
